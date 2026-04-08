@@ -1,0 +1,64 @@
+inventory = {
+    "coffee": {"quantity": 5, "price": 30},
+    "tea": {"quantity": 10, "price": 15},
+    "milk": {"quantity": 8, "price": 25}
+}
+
+def display_inventory():
+    if not inventory:
+        print("Inventory is empty!\n")
+    else:
+        print("\nUpdated Inventory:")
+        for name, details in inventory.items():
+            print(f"{name} -> Quantity: {details['quantity']}, Price: {details['price']}")
+        print()
+
+def add_item():
+    name = input("Enter item name: ").lower()
+    
+    if name in inventory:
+        print("Item already exists!\n")
+    else:
+        quantity = int(input("Enter quantity: "))
+        price = float(input("Enter price: "))
+        
+        inventory[name] = {"quantity": quantity, "price": price}
+        print("Item added successfully!")
+        display_inventory()   # 👈 auto display
+
+def update_item():
+    name = input("Enter item name to update: ").lower()
+    
+    if name in inventory:
+        quantity = int(input("Enter new quantity: "))
+        price = float(input("Enter new price: "))
+        
+        inventory[name]["quantity"] = quantity
+        inventory[name]["price"] = price
+        
+        print("Item updated successfully!")
+        display_inventory()   # 👈 auto display
+    else:
+        print("Item not found!\n")
+
+# Main Menu
+while True:
+    print("===== Inventory Management System =====")
+    print("1. Add Item")
+    print("2. Update Item")
+    print("3. Display Inventory")
+    print("4. Exit")
+    
+    choice = input("Enter your choice: ")
+    
+    if choice == '1':
+        add_item()
+    elif choice == '2':
+        update_item()
+    elif choice == '3':
+        display_inventory()
+    elif choice == '4':
+        print("Exiting program...")
+        break
+    else:
+        print("Invalid choice! Please try again.\n")
